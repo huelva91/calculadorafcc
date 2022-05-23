@@ -3,42 +3,57 @@ import fccLogo from "./imagenes/freecodecamp-logo.png";
 import Boton from "./componentes/Boton";
 import Pantalla from "./componentes/Pantalla";
 import BotonClear from "./componentes/BotonClear";
+import { useState } from "react";
+import { evaluate } from "mathjs";
 
 function App() {
+  const [input, setInput] = useState("");
+
+  const agregarInput = (valor) => {
+    setInput(input + valor);
+  };
+
+  const calcularResultado = () => {
+    if (input) {
+      setInput(evaluate(input));
+    } else {
+      alert("No hay nada que calcular");
+    }
+  };
+
   return (
     <div className="App">
       <div className="ffc-logo-contenedor">
         <img className="ffc-logo" src={fccLogo} alt="Logo de FFC" />
       </div>
       <div className="contenedor-calculadora">
-
-        <Pantalla />
+        <Pantalla input={input} />
         <div className="fila">
-          <Boton>1</Boton>
-          <Boton>2</Boton>
-          <Boton>3</Boton>
-          <Boton>+</Boton>
+          <Boton manejarClicks={agregarInput}>1</Boton>
+          <Boton manejarClicks={agregarInput}>2</Boton>
+          <Boton manejarClicks={agregarInput}>3</Boton>
+          <Boton manejarClicks={agregarInput}>+</Boton>
         </div>
         <div className="fila">
-          <Boton>4</Boton>
-          <Boton>5</Boton>
-          <Boton>6</Boton>
-          <Boton>-</Boton>
+          <Boton manejarClicks={agregarInput}>4</Boton>
+          <Boton manejarClicks={agregarInput}>5</Boton>
+          <Boton manejarClicks={agregarInput}>6</Boton>
+          <Boton manejarClicks={agregarInput}>-</Boton>
         </div>
         <div className="fila">
-          <Boton>7</Boton>
-          <Boton>8</Boton>
-          <Boton>9</Boton>
-          <Boton>*</Boton>
+          <Boton manejarClicks={agregarInput}>7</Boton>
+          <Boton manejarClicks={agregarInput}>8</Boton>
+          <Boton manejarClicks={agregarInput}>9</Boton>
+          <Boton manejarClicks={agregarInput}>*</Boton>
         </div>
         <div className="fila">
-          <Boton>=</Boton>
-          <Boton>0</Boton>
-          <Boton>.</Boton>
-          <Boton>/</Boton>
+          <Boton manejarClicks={calcularResultado}>=</Boton>
+          <Boton manejarClicks={agregarInput}>0</Boton>
+          <Boton manejarClicks={agregarInput}>.</Boton>
+          <Boton manejarClicks={agregarInput}>/</Boton>
         </div>
         <div className="fila">
-          <BotonClear>Clear</BotonClear>
+          <BotonClear manejarClear={() => setInput("")}>Clear</BotonClear>
         </div>
       </div>
     </div>
