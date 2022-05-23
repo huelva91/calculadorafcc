@@ -4,6 +4,7 @@
     margin-bottom: 20px;
     justify-content: flex-end;
     align-items: center;
+    display: flex;
     font-weight: bold;
     font-size: 30px;
     background-color: #0a0a23;
